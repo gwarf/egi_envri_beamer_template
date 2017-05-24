@@ -1,0 +1,122 @@
+\ProvidesPackage{beamerthemeegienvri}
+
+\mode<presentation>
+
+\newdimen\head@height
+\head@height=35pt
+
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+
+\definecolor{egiblue}{RGB}{0,103,167}
+\setbeamercolor{section in head}{fg=egiblue}
+\setbeamercolor{egi in head}{fg=egiblue}
+\setbeamercolor{date in foot}{fg=white,bg=egiblue}
+\setbeamercolor{alerted text}{fg=egiblue!90!black}
+\setbeamerfont{alerted text}{series=\bfseries}
+
+\setbeamertemplate{itemize item}{{\color{egiblue}$\bullet$}}
+\setbeamertemplate{itemize subitem}{{\color{egiblue}\textbf{--}}}
+\setbeamertemplate{itemize subsubitem}{{\color{egiblue}$\scriptstyle\blacktriangleright$}}
+
+\setbeamertemplate{navigation symbols}{}
+
+\newbox\logobox
+\setbox\logobox\hbox{\includegraphics[height=\head@height]{images/envri-logo.png}}
+
+\newdimen\headI
+
+\newcommand{\isitfrontorback}[2] {
+    \ifnum \value{page} = 1
+        #1
+    \else
+        \ifnum \value{page} = \inserttotalframenumber
+            #1
+        \else
+            #2
+        \fi
+    \fi
+}
+
+\defbeamertemplate*{headline}{egi theme}{\hrule height0pt depth0pt}
+
+\defbeamertemplate*{frametitle}{egi theme} {
+    \nointerlineskip
+    \baselineskip=0pt
+    \lineskip=0pt
+    \parsep=0pt
+    \headI=\head@height
+    \advance\headI-15pt
+    \begin{beamercolorbox}[wd=\paperwidth,ht=\headI,dp=10pt]{section in head}
+        \hfill\textbf{\insertframetitle\ }
+    \end{beamercolorbox}
+    \vspace{4pt}
+    \begin{beamercolorbox}[wd=\paperwidth,ht=6pt,dp=3pt]{egi in head}
+        \hbox to 6pt{
+        \vbox to 6pt{
+            \hsize=\wd\logobox
+            \vss\leavevmode\lower1pt\copy\logobox\par
+        }
+      }
+        \hfill\tiny\hskip1em \insertframesubtitle \quad \strut
+    \end{beamercolorbox}
+}
+
+\define@key{beamerframe}{final}[true]{
+    \setbeamertemplate{frametitle}{}
+    \color{egiblue}
+}
+
+\defbeamertemplate*{footline}{egi theme} {
+    \isitfrontorback{
+        \begin{beamercolorbox}{egi in head}
+            \quad \includegraphics[height=\head@height]{images/egi.png}
+            \quad \includegraphics[height=\head@height]{images/envri-logo.png}
+            \vspace{1em}
+
+            \quad\hrulefill\quad
+            \vspace{1em}
+        \end{beamercolorbox}
+        \hfill
+        \begin{beamercolorbox}[wd=0.9\paperwidth,dp=0pt]{egi in head}
+            \quad \href{http://www.egi.eu}{www.egi.eu}
+            \quad \href{http://www.envriplus.eu}{www.envriplus.eu}
+            \hfill
+            \raggedleft
+            \ifnum \value{page} = 1
+                \tiny ENVRI Plus is co-funded by the Horizon 2020 Framework Programme \\
+                of the European Union under grant number 654182
+            \else
+                \tiny ENVRI Plus: Supporting environmental research with integrated solutions \\
+                \textbf{The Earth is our lab}
+            \fi
+            \vspace{0.1cm}
+        \end{beamercolorbox}  
+        \includegraphics[height=0.6cm]{images/eu.png}
+        \quad\strut
+    }{
+        \leavevmode
+        \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1ex]{date in foot}
+            {\flushleft \quad \today \hfill \insertframenumber \quad \strut }
+        \end{beamercolorbox}
+    }
+}
+
+\setbeamertemplate{background}{
+    \isitfrontorback{
+        \includegraphics[height=\paperheight]{images/back.png}
+    }{
+        \includegraphics[height=0.5\paperheight]{images/back_white.png}
+    }
+}
+
+\setbeamertemplate{title page}{
+    \nointerlineskip
+    \lineskip=0pt
+    \vfill
+    \textbf{\Large\inserttitle}
+    \bigskip
+
+    \usebeamerfont{author}\insertauthor\par
+    \usebeamerfont{institute}\insertinstitute\par
+}

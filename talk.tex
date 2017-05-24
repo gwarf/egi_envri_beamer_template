@@ -1,0 +1,39 @@
+\documentclass{beamer}
+
+\usetheme{egienvri}
+
+\begin{document}
+
+\title{Presentation title}
+\author[J. Doea]{John Doe \inst{1}\\
+fulano@example.org \\~
+}
+
+\institute[foo] % (optional, but mostly needed)
+{
+    \inst{1}
+    Foo Institute
+}
+
+% This will create the frame title, should be untouched.
+\begin{frame}
+    \maketitle
+\end{frame}
+
+% Add the content here
+\begin{frame}[fragile]
+    \frametitle{Frame title}
+    \framesubtitle{Frame subtitle}
+    Content.
+\end{frame}
+
+% This will create the final slide, should be untouched
+\begin{frame}[final]
+    \Huge \textbf{Thank you for your attention.}
+
+    \bigskip
+
+    \large \textit{Questions?}
+\end{frame}
+
+\end{document}
